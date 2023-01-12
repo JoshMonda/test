@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>solution</title>
+</head>
+<style>
+  #greeting-btn
+  {
+   background-color: #1F75FE;
+   color: white;
+   border: none;
+   height: 5vh;
+   width: 10vw;
+   border-radius: 3px 3px 3px 3px;
+  }
+  #name-input
+  {
+   height: 4vh;
+   width: 15vw;
+   border-radius: 3px 3px 3px 3px;
+  }
+  #greeting
+  {
+    width: 55vw;
+  }
+ .center {
+position: relative;
+}
+body
+{
+  font-family: Helvetica;
+  padding-left: 25%;
+  /*padding-right: 45px;*/
+  /*font-size: 20px;*/
+  width: 50vw;
+}
+
+</style>
+<body class="center">
+ 
+  <h1 id="heading1">DYNAMIC EVENTS</h1>
+  <h4 id="heading4">Demonstrate a web page handling dynamic events.</h4>
+  <p id="paragraph">Hello! This page will display a greeting along with some information on the time of the day and the current date. Please start by entering your name below...</p>
+
+  <!-- <img id="image" src="default-image.jpg"> -->
+  <label>Firstname:</label>
+  <input type="text" id="name-input" placeholder="Your first name">
+  <button id="greeting-btn" class="btn btn-primary">Display Greeting</button>
+  <p id="greeting"></p>
+
+  <script>
+    let greetingBtn = document.getElementById("greeting-btn");
+    let greeting = document.getElementById("greeting");
+    let nameInput = document.getElementById("name-input");
+
+    greetingBtn.addEventListener("click", function() {
+      let name = nameInput.value;
+      let date = new Date();
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let dayOfWeek = date.toLocaleString('default', { weekday: 'long' });
+      let month = date.toLocaleString('default', { month: 'long' });
+      let day = date.getDate();
+      let year = date.getFullYear();
+      let timeOfDay = "";
+      let remainingMinutes = 1440 - (date.getHours() * 60 + minutes);
+
+      if (hours < 11) {
+        timeOfDay = "Morning";
+       } else if (hours >= 11 && hours < 14) {
+        timeOfDay = "Day";
+       }
+        else if (hours >= 14 && hours < 18) {
+        timeOfDay = "Afternoon";
+        } 
+        else {
+        timeOfDay = "Evening";
+      }
+
+    // greeting.onmouseover = function() {this.style.backgroundColor = "yellow";}
+
+      greeting.innerHTML = `Greetings <b>${name}!</b> We hope you are having a wonderful <b>${timeOfDay}!</b>,<br><br>
+      Today's date is <b>${dayOfWeek}, ${day} ${month} ${year}</b> and a total of <b>${hours}</b> hours and <b>${minutes}</b> minutes have passed.
+      <br><br>
+      Hope you enjoy the remaining <b>${remainingMinutes}</b> minutes left in the day!
+    `;
+    });
+    greeting.addEventListener("mouseover", function() {
+  greeting.style.backgroundColor = "yellow";
+});
+/* Add event listener for the onmouseout effect */
+greeting.addEventListener("mouseout", function() {
+  greeting.style.backgroundColor = "";
+});
+  </script>
+</body>
+</html>
